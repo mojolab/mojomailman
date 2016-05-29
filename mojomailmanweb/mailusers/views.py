@@ -5,5 +5,6 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def index(request):
-	return HttpResponse("Hello %s" %(request.user.username))
+    return render(request,"mailusers/index.html")
+
 # Create your views here.
