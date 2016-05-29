@@ -5,5 +5,6 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def index(request):
-    return HttpResponse("Hello, world. You're at the reports index.")
+    return render(request,"reports/index.html")
+    #return HttpResponse("Hello, world. You're at the reports index.")
 # Create your views here.
