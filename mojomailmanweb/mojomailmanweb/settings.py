@@ -48,9 +48,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+#AUTH_USER_MODEL = 'mailusers.MailUser'
 ROOT_URLCONF = 'mojomailmanweb.urls'
-
+AUTHENTICATION_BACKENDS = (
+'dpam.backends.PAMBackend',
+)
+PAM_IS_STAFF=True
+PAM_IS_SUPERUSER=True
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

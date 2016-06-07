@@ -24,7 +24,7 @@
 				<div class="inner">
 					<nav>
 						<ul>
-							<li><a href="#intro">Welcome</a></li>
+							<li><a href="#intro">Welcome {{ request.user.username }}</a></li>
 							<li><a href="#one">Administration</a></li>
 							<li><a href="#two">Read Some Funny Things</a></li>
 							<li><a href="#three">Set Up Your Mail</a></li>
@@ -70,8 +70,8 @@
 							<a href="#" class="image"><img src="{% static 'hh/images/pic02.jpg' %}" alt="" data-position="top center" /></a>
 							<div class="content">
 								<div class="inner">
-									<h2>Feugiat consequat</h2>
-									<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus.</p>
+									<h2>Webmin Console</h2>
+									<p>The Webmin Console For This Device</p>
 									<ul class="actions">
 										<li><a href="#" class="button">Learn more</a></li>
 									</ul>
@@ -83,8 +83,8 @@
 							<a href="#" class="image"><img src="{% static 'hh/images/pic03.jpg' %}" alt="" data-position="25% 25%" /></a>
 							<div class="content">
 								<div class="inner">
-									<h2>Ultricies aliquam</h2>
-									<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus.</p>
+									<h2>Ajenti Console</h2>
+									<p>Ajenti Console for this Device</p>
 									<ul class="actions">
 										<li><a href="#" class="button">Learn more</a></li>
 									</ul>
