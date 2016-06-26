@@ -25,13 +25,12 @@
 					<nav>
 						<ul>
 							<li><a href="#intro">Welcome {{ request.user.username }}</a></li>
+							 {% if request.user.is_staff %}
 							<li><a href="#one">Administration</a></li>
+							{% endif %}
 							<li><a href="#two">Read Some Funny Things</a></li>
 							<li><a href="#three">Set Up Your Mail</a></li>
-							
-							
 						</ul>
-						
 					</nav>
 					<a href="{% url 'logout' %}?next=/" class="button scrolly">Log Out</a>
 				</div>
@@ -50,7 +49,7 @@
 							</ul>
 						</div>
 					</section>
-
+ {% if request.user.is_staff %}
 				<!-- One -->
 					<section id="one" class="wrapper style2 spotlights">
 						<section>
@@ -60,12 +59,13 @@
 									<h2>Administrative Interface</h2>
 									<p>The Administrative Interface allows control of the backend of the MojoMailMan system</p>
 									<ul class="actions">
-										<li><a href="/admin" class="button">Go to Administrative Interface</a></li>
+										<li><a href="/admin/adm" class="button">Go to Administrative Interface</a></li>
 									</ul>
 								</div>
 							</div>
 						</section>
 					<!---->
+
 						<section>
 							<a href="#" class="image"><img src="{% static 'hh/images/pic02.jpg' %}" alt="" data-position="top center" /></a>
 							<div class="content">
@@ -93,13 +93,16 @@
 						</section>
 					</section>
 
-
+{% endif %}
                  
 				<!-- Two -->
 					<section id="two" class="wrapper style3 fade-up">
 						<div class="inner">
 							<h2>What we do</h2>
-							<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus, lacus eget hendrerit bibendum, urna est aliquam sem, sit amet imperdiet est velit quis lorem.</p>
+							
+							<p>{% for address in emailaddresses.all %} 
+							{{ address.email }} 
+							{% endfor %}</p>
 							<div class="features">
 								<section>
 									<span class="icon major fa-code"></span>
