@@ -59,7 +59,7 @@
 									<h2>Administrative Interface</h2>
 									<p>The Administrative Interface allows control of the backend of the MojoMailMan system</p>
 									<ul class="actions">
-										<li><a href="/admin/adm" class="button">Go to Administrative Interface</a></li>
+										<li><a href="/admin/" class="button">Go to Administrative Interface</a></li>
 									</ul>
 								</div>
 							</div>
@@ -99,11 +99,11 @@
 					<section id="two" class="wrapper style3 fade-up">
 						<div class="inner">
 							<h2>What we do</h2>
-							
-							<p>{% for address in emailaddresses.all %} 
+							<p>{% for address in emailaddresses %} 
 							{{ address.email }} 
 							{% endfor %}</p>
 							<div class="features">
+								
 								<section>
 									<span class="icon major fa-code"></span>
 									<h3>Lorem ipsum amet</h3>
@@ -144,7 +144,7 @@
 				<!-- Three -->
 					<section id="three" class="wrapper style1 fade-up">
 						<div class="inner">
-							<h2>Get in touch</h2>
+							<h2>Set Up Mail Accounts</h2>
 							<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus, lacus eget hendrerit bibendum, urna est aliquam sem, sit amet imperdiet est velit quis lorem.</p>
 							<div class="split style1">
 								<section>
@@ -165,8 +165,11 @@
 											<li><a href="" class="button submit">Send Message</a></li>
 										</ul>
 									</form>
+								
 								</section>
-								<section>
+							
+									<!--<section>
+									
 									<ul class="contact">
 										<li>
 											<h3>Address</h3>
@@ -194,7 +197,8 @@
 										</li>
 									</ul>
 								</section>
-							</div>
+							</div>	-->
+							
 						</div>
 					</section>
 

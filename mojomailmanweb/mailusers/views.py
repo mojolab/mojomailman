@@ -9,7 +9,8 @@ def index(request):
 	c=Context()
 	emailaddresses=EmailAddress.objects.all().filter(user__username=request.user.username)
 	c['emailaddresses']=emailaddresses
-	print c
+	print c['emailaddresses'][0].email
 	return render(request,"mailusers/index.html",c)
-
+def test(request):
+	return request
 # Create your views here.

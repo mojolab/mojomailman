@@ -17,10 +17,13 @@ from django.conf.urls import include,url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 import django.contrib.auth.views
+from . import views
 urlpatterns = [
 	url(r'^mailusers/', include('mailusers.urls')),
     url(r'^reports/', include('reports.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^admin/mailusers/emailaddress/([0-9]+)/generate_config_files', views.test),
+   
     #url('^$',include('django.contrib.auth.urls')),
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, name='logout'),
