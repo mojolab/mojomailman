@@ -22,7 +22,7 @@ urlpatterns = [
 	url(r'^mailusers/', include('mailusers.urls')),
     url(r'^reports/', include('reports.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^admin/mailusers/emailaddress/([0-9]+)/generate_config_files', views.test),
+    #url(r'^admin/mailusers/emailaddress/([0-9]+)/generate_config_files', views.test),
    
     #url('^$',include('django.contrib.auth.urls')),
     url(r'^login/$', auth_views.login, name='login'),
