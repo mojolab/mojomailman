@@ -1,0 +1,13 @@
+{% extends "admin/change_form.html" %} {% load i18n %} 
+{% block object-tools-items %}
+    {{ block.super }}
+    <li>
+        <a class="historylink" href="../generate_config_files">Generate Config Files</a>
+    </li>
+     <li>
+        <a class="historylink" href="../view_config_files">View Config Files</a>
+    </li>
+    <li>
+        <a class="historylink" href="../apply_config_files">Apply Config Files</a>
+    </li>
+{% endblock %}

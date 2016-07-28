@@ -1,0 +1,98 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>MojoMailMan</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<!--<link rel="stylesheet" href="static/assets/css/main.css" />-->
+		<link rel="stylesheet" href="{% static 'hh/assets/css/main.css' %}" />
+		
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+
+
+
+
+
+
+
+
+
+
+		<!-- Sidebar -->
+			<section id="sidebar">
+				<div class="inner">
+					<nav>
+						<ul>
+							<li><a href="#intro">Welcome {{ request.user.username }}</a></li>
+							 {% if request.user.is_staff %}
+							<li><a href="#one">Administration</a></li>
+							{% endif %}
+							<li><a href="#two">Your Email Accounts</a></li>
+							<li><a href="#three">Add an Email Account</a></li>
+						</ul>
+					</nav>
+					<a href="{% url 'logout' %}?next=/" class="button scrolly">Log Out</a>
+				</div>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Intro -->
+					<section id="intro" class="wrapper style1 fullscreen fade-up">
+						<div class="inner">
+							<h1><img src="{% static 'mojomailmanlogo.png' %}" height=100 width=100 /> MojoMailMan</h1>
+							
+							<p>Email address: {{detail.email}}</p>
+							<p>Password: {{detail.password}}</p>
+							<p>SMTP Server: {{detail.email_smtp_server}}</p>
+							<p>IMAP Server: {{detail.email_imap_server}}</p>
+							<p>SMTP Port: {{detail.email_smtp_port}}</p>
+							<p>IMAP Port: {{detail.email_imap_port}}</p>
+							
+							<ul class="actions">
+								<li><a href="/" class="button scrolly">Go Home</a></li>
+							</ul>
+						</div>
+					</section>
+                 
+
+							
+						
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper style1-alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>&copy; Arjun Venkatraman. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a> released for free under the <a href="http://html5up.net/license">Creative Commons</a>.</li>
+						
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="{% static 'hh/assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'hh/assets/js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'hh/assets/js/jquery.scrolly.min.js' %}"></script>
+			<script src="{% static 'hh/assets/js/skel.min.js' %}"></script>
+			<script src="{% static 'hh/assets/js/util.js' %}"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="{% static 'hh/assets/js/main.js' %}"></script>
+
+	</body>
+</html>

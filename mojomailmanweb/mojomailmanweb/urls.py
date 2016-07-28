@@ -17,12 +17,14 @@ from django.conf.urls import include,url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 import django.contrib.auth.views
-
+from mailusers import views as mailviews
 urlpatterns = [
 	url(r'^mailusers/', include('mailusers.urls')),
     url(r'^reports/', include('reports.urls')),
     url(r'^admin/', admin.site.urls),
-    #url(r'^admin/mailusers/emailaddress/([0-9]+)/generate_config_files', views.test),
+    url(r'^admin/mailusers/emailaddress/([0-9]+)/generate_config_files', mailviews.generate_email_config),
+	url(r'^admin/mailusers/emailaddress/([0-9]+)/view_config_files', mailviews.view_email_config),
+	url(r'^admin/mailusers/emailaddress/([0-9]+)/apply_config_files', mailviews.apply_email_config),
    
     #url('^$',include('django.contrib.auth.urls')),
     url(r'^login/$', auth_views.login, name='login'),

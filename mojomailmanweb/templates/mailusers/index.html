@@ -28,8 +28,8 @@
 							 {% if request.user.is_staff %}
 							<li><a href="#one">Administration</a></li>
 							{% endif %}
-							<li><a href="#two">Read Some Funny Things</a></li>
-							<li><a href="#three">Set Up Your Mail</a></li>
+							<li><a href="#two">Your Email Accounts</a></li>
+							<li><a href="#three">Add an Email Account</a></li>
 						</ul>
 					</nav>
 					<a href="{% url 'logout' %}?next=/" class="button scrolly">Log Out</a>
@@ -98,42 +98,19 @@
 				<!-- Two -->
 					<section id="two" class="wrapper style3 fade-up">
 						<div class="inner">
-							<h2>What we do</h2>
-							<p>{% for address in emailaddresses %} 
-							{{ address.email }} 
-							{% endfor %}</p>
+							<h2>Your Email Accounts</h2>
 							<div class="features">
-								
+							{% for address in x %} 	
 								<section>
 									<span class="icon major fa-code"></span>
-									<h3>Lorem ipsum amet</h3>
-									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
+									<h3>{{ address.email }}</h3>
+									
+									<p># of mails queued for sending: <b>{{ address.queued }}</b>
+									<br># of new mails received:  <b>{{ address.new }}</b>
+									<br>Last updated:  {{ address.lastchecked }}</p>
+									
 								</section>
-								<section>
-									<span class="icon major fa-lock"></span>
-									<h3>Aliquam sed nullam</h3>
-									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
-								</section>
-								<section>
-									<span class="icon major fa-cog"></span>
-									<h3>Sed erat ullam corper</h3>
-									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
-								</section>
-								<section>
-									<span class="icon major fa-desktop"></span>
-									<h3>Veroeros quis lorem</h3>
-									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
-								</section>
-								<section>
-									<span class="icon major fa-chain"></span>
-									<h3>Urna quis bibendum</h3>
-									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
-								</section>
-								<section>
-									<span class="icon major fa-diamond"></span>
-									<h3>Aliquam urna dapibus</h3>
-									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
-								</section>
+							{% endfor %}	
 							</div>
 							<ul class="actions">
 								<li><a href="#" class="button">Learn more</a></li>
@@ -144,8 +121,8 @@
 				<!-- Three -->
 					<section id="three" class="wrapper style1 fade-up">
 						<div class="inner">
-							<h2>Set Up Mail Accounts</h2>
-							<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus, lacus eget hendrerit bibendum, urna est aliquam sem, sit amet imperdiet est velit quis lorem.</p>
+							<h2>Request Admin to add an Email Account</h2>
+							<p>Request Admin to Add a new Email Account for you.</p>
 							<div class="split style1">
 								<section>
 									<form method="post" action="#">
