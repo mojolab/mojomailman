@@ -40,12 +40,13 @@ class MojoMailer:
     self.inport=config.get("System","inport")
     self.logfile=config.get("System","logfile")
     self.tz=config.get("System","timezone")
+    self.detach_dir=config.get("System","detach_dir")
     
   def gettsstring(self):
       return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
   
-  def logintomail(self):
-    self.m = imaplib.IMAP4_SSL("imap.gmail.com")
+  def logintoinmail(self):
+    self.m = imaplib.IMAP4_SSL(self.inserver)
     self.m.login(self.inusername,self.inpassword)
     print "Logged in"
     
@@ -95,6 +96,7 @@ class MojoMailer:
     #date = (datetime.datetime.now() - datetime.timedelta(numdays)).strftime("%d-%b-%Y %H:%M%S")
     #searchstring='(SINCE "19-May-2013 13:00:00" SUBJECT "'+search+'")'
     searchstring='(SINCE "'+since+'" BEFORE "'+before+'" SUBJECT "'+search+'")'
+    print searchstring
     resp, items = self.m.search('utf-8'	, searchstring)
     messagelist= items[0].split()
     return messagelist
@@ -121,21 +123,27 @@ class MojoMailer:
   #def getmessages(self,search,since,subjectkey,detach_dir):
   def getmessages(self,items,detach_dir):
     logging.basicConfig(filename=self.logfile, level=logging.INFO, format='%(asctime)s %(message)s', datefmt="%Y-%m-%d %H:%M:%S")
+    detach_dir=self.detach_dir
     messages=[]
     for emailid in items:
       dictionary={}
+      print emailid
       dictionary['$UID']=emailid
       resp, data = self.m.fetch(emailid, "(RFC822)") # fetching the mail, "`(RFC822)`" means "get the whole stuff", but you can ask for headers only, etc
       email_body = data[0][1] # getting the mail content
+      #print email_body
       mail = email.message_from_string(email_body) # parsing the mail content to get a mail object
       #Check if any attachments at all
-      if mail.get_content_maintype() != 'multipart':
-          continue
+      #if mail.get_content_maintype() != 'multipart':
+          #continue
+      print mail.keys()
       dictionary['$FROM']=mail["From"]
       dictionary["$TO"]=mail["To"]
       dictionary["$TIMESTAMP"]=convertstringtodate(mail['Date'],self.tz)
       subject=mail["Subject"]    
+      print subject 
       dictionary['$SUBJECT']=decode_header(subject)[0][0]
+      print dictionary
       for part in mail.walk():
         # multipart are just containers, so we skip them
         if part.get_content_maintype() == 'multipart':
@@ -157,8 +165,8 @@ class MojoMailer:
           fp.write(part.get_payload(decode=True))
           fp.close()
         dictionary["$ATTACHMENT"]=att_path
-        messages.append(dictionary)
-        logging.info("Read message " + subject)
+      messages.append(dictionary)
+      logging.info("Read message " + subject)
     return messages
     
   def getmailmessage(self,emailid,subjectkey,detach_dir):
@@ -210,7 +218,7 @@ class MojoMailer:
         logging.info("Read message " + subject)
         return dictionary
     
-class MojoMessage:  
+class MojoMessager:  
   def __init__(self,configfile):
     config=ConfigParser.ConfigParser()
     config.read(configfile)
