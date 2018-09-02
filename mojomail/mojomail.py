@@ -3,22 +3,29 @@
 import os, sys,string
 import datetime,quopri
 import ConfigParser
-from mojomailGMail import MojoGMail
-class MojoMailer:
-  def __init__(self,configfile):
+import logging
+import coloredlogs
+sys.path.append(".")
+from constants import  XPAL_CONSOLE_FORMAT,XPAL_LEVEL_STYLES,XPAL_FIELD_STYLES
+
+def get_xpal_logger(name):
+	xpallogger=logging.getLogger(name)
+	coloredlogs.install(level="INFO",logger=xpallogger,fmt=XPAL_CONSOLE_FORMAT,level_styles=XPAL_LEVEL_STYLES,field_styles=XPAL_FIELD_STYLES)
+	return xpallogger
+
+baselogger=get_xpal_logger("MojoMailBaseLogger")
+
+class MojoMailer(object):
+  def __init__(self,configfile,logger=baselogger):
     # directory where to save attachments (default: current)
     config=ConfigParser.ConfigParser()
     config.read(configfile)
-    #self.inpassword=config.get("MojoMail","inpassword")
-    #self.inusername=config.get("MojoMail","inusername")
-    #self.outpassword=config.get("MojoMail","outpassword")
-    #self.outusername=config.get("MojoMail","outusername")
+    logger.info("Making MojoMailer")
     self.name=config.get("MojoMail","name")
+    self.logger=logger
+    #self.logger=get_xpal_logger(self.name)
+    self.logger.info("Server name is %s" %self.name)
     self.serversig=config.get("MojoMail","serversig")
-    #self.outserver=config.get("MojoMail","outserver")
-    #self.inserver=config.get("MojoMail","inserver")
-    #self.outport=config.get("MojoMail","outport")
-    #self.inport=config.get("MojoMail","inport")
     self.logfile=config.get("MojoMail","logfile")
     self.tz=config.get("MojoMail","timezone")
     self.detach_dir=config.get("MojoMail","detach_dir")
@@ -26,10 +33,11 @@ class MojoMailer:
     self.configfile=configfile
   def gettsstring(self):
       return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+  '''
   def gettransport(self):
       if self.transport=="GMail":
           self.gmail=MojoGMail(self.configfile)
-
+  '''
 
 
 class MojoMessager:
